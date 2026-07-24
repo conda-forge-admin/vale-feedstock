@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "3.15.1"
+  version: "3.15.2"
   go_min: "1.25.3"
   go_mod: github.com/errata-ai/vale
   go_build: go build -v --buildmode=pie -trimpath -modcacherw -ldflags "-s -w -X main.version=${{ version }}"
@@ -23,7 +23,7 @@ recipe:
 
 source:
   - url: https://github.com/vale-cli/vale/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: f2dc8fd38deb4789a780f5e2f1fbb8489c45333ccd6e923999e528d78efe297a
+    sha256: 5774342156ff060ba8007b71d8f63f98daa9313ecfadea17aca34b272b16ff1a
     target_directory: src/${{ go_mod }}
     patches:
       - 0000-use-conda-prefix.patch
