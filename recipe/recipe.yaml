@@ -2,14 +2,15 @@
 schema_version: 1
 
 context:
-  version: "3.15.1"
+  version: "3.15.2"
   go_min: "1.25.3"
   go_mod: github.com/errata-ai/vale
   go_build: go build -v --buildmode=pie -trimpath -modcacherw -ldflags "-s -w -X main.version=${{ version }}"
   go_bin: ${{ "$PREFIX/bin/$PKG_NAME" if unix else "%PREFIX%\\bin\\%PKG_NAME%.exe" }}
   go_mod_xz: github.com/xi2/xz
   go_mod_ts_julia: github.com/jdkato/go-tree-sitter-julia/julia
-  license_ignore: ${{ go_mod_xz }} ${{ go_mod_ts_julia }} ${{ go_mod }}
+  go_mod_mathjax: github.com/litao91/goldmark-mathjax
+  license_ignore: ${{ go_mod_xz }} ${{ go_mod_ts_julia }} ${{ go_mod_mathjax }} ${{ go_mod }}
   var_src_dir: ${{ "$SRC_DIR" if unix else "%SRC_DIR%" }}
   var_conda_prefix: ${{ "$CONDA_PREFIX" if unix else "%CONDA_PREFIX%" }}
   mkdir: ${{ "mkdir -p" if unix else "md" }}
@@ -23,7 +24,7 @@ recipe:
 
 source:
   - url: https://github.com/vale-cli/vale/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: f2dc8fd38deb4789a780f5e2f1fbb8489c45333ccd6e923999e528d78efe297a
+    sha256: 5774342156ff060ba8007b71d8f63f98daa9313ecfadea17aca34b272b16ff1a
     target_directory: src/${{ go_mod }}
     patches:
       - 0000-use-conda-prefix.patch
